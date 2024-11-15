@@ -52,9 +52,9 @@ The following features are validated with the tests:
 
     1.	Clone the Repository:
 
-`git clone https://github.com/mark-escosura/loginUI.git`
+`git clone https://github.com/mark-escosura/mark-escosura-login-ui-project.git`
 
-`cd loginUI`
+`cd mark-escosura-login-ui-project`
 
     2.	Install Dependencies:
 
