@@ -9,9 +9,34 @@ body {
 }
 
 .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;    
     background-color:hsl(from #14a7ba h s l);
     border-radius: 10px;
     padding: 20px;
     width: 300px;
     text-align: center;
+    box-shadow: #f4f6f4;
+}
+
+in {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+h2 {
+    font-size: 20px;
+}
+
+button {
+    margin-top: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color:white;
 }
