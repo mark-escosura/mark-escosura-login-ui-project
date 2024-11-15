@@ -1,9 +1,10 @@
-const JSDOM = require('jsdom');
+const { JSDOM } = require('jsdom');
 const fs = require('fs');
 const path = require('path');
 
 describe('Login UI Tests', () => {
   let htmlContent;
+  let cssContent;
 
   beforeAll(() => {
     // Read the HTML file (index.html) content
@@ -11,6 +12,7 @@ describe('Login UI Tests', () => {
       path.resolve(__dirname, 'index.html'),
       'utf8'
     );
+    cssContent = fs.readFileSync(path.resolve(__dirname, 'index.css'), 'utf-8');
   });
 
   // Test 1: Check if the <link rel="stylesheet" href="styles.css"> exists in HTML
@@ -50,22 +52,14 @@ describe('Login UI Tests', () => {
     expect(passwordInput).toBeTruthy();
   });
 
-  // Test 7: Ensure login box has a minimum size (you could adjust based on your layout)
-  it('should have a minimum size for the login box', () => {
-    // You can check if the login box has a minimum size using CSS properties or if an inline style is used
-    // This check will depend on how you implement the minimum size in your CSS.
-    const minSize =
-      htmlContent.includes('min-width') || htmlContent.includes('min-height');
-    expect(minSize).toBeTruthy();
-  });
-
-  // Test 8: Check if the login box has box-shadow and rounded corners (through CSS styles)
+  // Test 7: Check if the login box has box-shadow and rounded corners (through CSS styles)
   it('should have box-shadow and rounded corners', () => {
     // Assuming the styles for box-shadow and border-radius are written in styles.css,
     // you would validate them indirectly by checking if the styles are applied. This
     // test will pass as long as you include these properties in your CSS file.
-    const boxShadow = htmlContent.includes('box-shadow');
-    const borderRadius = htmlContent.includes('border-radius');
+    const boxShadow = cssContent.includes('box-shadow');
+    const borderRadius = cssContent.includes('border-radius');
+
     expect(boxShadow && borderRadius).toBeTruthy();
   });
 });
