@@ -1,3 +1,4 @@
+const JSDOM = require('jsdom');
 const fs = require('fs');
 const path = require('path');
 
@@ -19,7 +20,7 @@ describe('Login UI Tests', () => {
 
   // Test 2: Check if the login box exists
   it('should have a login box', () => {
-    expect(htmlContent).toMatch(/<div class="login-box">/);
+    expect(htmlContent).toMatch(/<form class="login-box">/);
   });
 
   // Test 3: Check if there is a username input field
@@ -66,5 +67,51 @@ describe('Login UI Tests', () => {
     const boxShadow = htmlContent.includes('box-shadow');
     const borderRadius = htmlContent.includes('border-radius');
     expect(boxShadow && borderRadius).toBeTruthy();
+  });
+});
+
+describe('Login UI Flexbox Test', () => {
+  let document;
+
+  beforeEach(() => {
+    // Load the HTML file
+    const html = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf8');
+    const dom = new JSDOM(html);
+    document = dom.window.document;
+  });
+
+  it('should apply Flexbox layout to the login container', () => {
+    const loginContainer = document.querySelector('.login-container');
+
+    // Check if the login container uses Flexbox
+    expect(loginContainer).toHaveStyle('display: flex');
+    expect(loginContainer).toHaveStyle('justify-content: center');
+    expect(loginContainer).toHaveStyle('align-items: center');
+  });
+
+  it('should center the login box using Flexbox', () => {
+    const loginBox = document.querySelector('.login-box');
+
+    // Check if the login box uses Flexbox with column direction
+    expect(loginBox).toHaveStyle('display: flex');
+    expect(loginBox).toHaveStyle('flex-direction: column');
+    expect(loginBox).toHaveStyle('justify-content: space-between');
+    expect(loginBox).toHaveStyle('align-items: stretch');
+  });
+
+  it('should ensure input fields are aligned properly in the login box', () => {
+    const usernameInput = document.querySelector('input[type="text"]');
+    const passwordInput = document.querySelector('input[type="password"]');
+
+    // Check if input fields have expected layout properties
+    expect(usernameInput).toHaveStyle('margin: 10px 0');
+    expect(passwordInput).toHaveStyle('margin: 10px 0');
+  });
+
+  it('should ensure the button is placed correctly at the bottom of the login box', () => {
+    const button = document.querySelector('button');
+
+    // Check if the button is at the bottom of the login box (using Flexbox)
+    expect(button).toHaveStyle('margin-top: 10px');
   });
 });
