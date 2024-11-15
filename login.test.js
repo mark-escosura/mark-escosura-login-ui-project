@@ -2,9 +2,13 @@ const { JSDOM } = require('jsdom');
 const fs = require('fs');
 const path = require('path');
 
+const cssContent = fs.readFileSync(
+  path.resolve(__dirname, 'styles.css'),
+  'utf8'
+);
+
 describe('Login UI Tests', () => {
   let htmlContent;
-  let cssContent;
 
   beforeAll(() => {
     // Read the HTML file (index.html) content
@@ -12,12 +16,16 @@ describe('Login UI Tests', () => {
       path.resolve(__dirname, 'index.html'),
       'utf8'
     );
-    cssContent = fs.readFileSync(path.resolve(__dirname, 'index.css'), 'utf-8');
+  });
+
+  // Test 0: Check if the <title /> exists in HTML
+  it('should have a title (Name) Login UI Project', () => {
+    expect(htmlContent).toMatch(/<title>Mark's Login UI Project<\/title>/);
   });
 
   // Test 1: Check if the <link rel="stylesheet" href="styles.css"> exists in HTML
-  it('should include the link to index.css', () => {
-    expect(htmlContent).toMatch(/<link rel="stylesheet" href="index.css">/);
+  it('should include the link to styles.css', () => {
+    expect(htmlContent).toMatch(/<link rel="stylesheet" href="styles.css">/);
   });
 
   // Test 2: Check if the login box exists
@@ -62,50 +70,54 @@ describe('Login UI Tests', () => {
 
     expect(boxShadow && borderRadius).toBeTruthy();
   });
+  // Test 8: Check if the login box has min-width and min-height (through CSS styles)
+  it('should have min-width and min-height for the login box', () => {
+    // Check if the min-width and min-height are in the styles
+    const minWidth = cssContent.includes('min-width');
+    const minHeight = cssContent.includes('min-height');
+
+    // Ensure that both min-width and min-height exist in the styles
+    expect(minWidth && minHeight).toBeTruthy();
+  });
 });
 
 describe('Login UI Flexbox Test', () => {
   let document;
-
   beforeEach(() => {
-    // Load the HTML file
+    // Load the HTML file and parse it with jsdom
     const html = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf8');
     const dom = new JSDOM(html);
     document = dom.window.document;
   });
 
-  it('should apply Flexbox layout to the login container', () => {
-    const loginContainer = document.querySelector('.login-container');
+  function hasCssRule(selector, rule) {
+    // Check if the CSS content includes the selector with the specified rule
+    const regex = new RegExp(`${selector}\\s*{[^}]*${rule}[^}]*}`, 'i');
+    return regex.test(cssContent);
+  }
 
-    // Check if the login container uses Flexbox
-    expect(loginContainer).toHaveStyle('display: flex');
-    expect(loginContainer).toHaveStyle('justify-content: center');
-    expect(loginContainer).toHaveStyle('align-items: center');
+  it('should apply Flexbox layout to the login container', () => {
+    expect(hasCssRule('.login-container', 'display: flex')).toBeTruthy();
+    expect(
+      hasCssRule('.login-container', 'justify-content: center')
+    ).toBeTruthy();
+    expect(hasCssRule('.login-container', 'align-items: center')).toBeTruthy();
   });
 
   it('should center the login box using Flexbox', () => {
-    const loginBox = document.querySelector('.login-box');
-
-    // Check if the login box uses Flexbox with column direction
-    expect(loginBox).toHaveStyle('display: flex');
-    expect(loginBox).toHaveStyle('flex-direction: column');
-    expect(loginBox).toHaveStyle('justify-content: space-between');
-    expect(loginBox).toHaveStyle('align-items: stretch');
+    expect(hasCssRule('.login-box', 'display: flex')).toBeTruthy();
+    expect(hasCssRule('.login-box', 'flex-direction: column')).toBeTruthy();
+    expect(
+      hasCssRule('.login-box', 'justify-content: space-between')
+    ).toBeTruthy();
+    expect(hasCssRule('.login-box', 'align-items: stretch')).toBeTruthy();
   });
 
   it('should ensure input fields are aligned properly in the login box', () => {
-    const usernameInput = document.querySelector('input[type="text"]');
-    const passwordInput = document.querySelector('input[type="password"]');
-
-    // Check if input fields have expected layout properties
-    expect(usernameInput).toHaveStyle('margin: 10px 0');
-    expect(passwordInput).toHaveStyle('margin: 10px 0');
+    expect(hasCssRule('input', 'margin: 10px 0')).toBeTruthy();
   });
 
   it('should ensure the button is placed correctly at the bottom of the login box', () => {
-    const button = document.querySelector('button');
-
-    // Check if the button is at the bottom of the login box (using Flexbox)
-    expect(button).toHaveStyle('margin-top: 10px');
+    expect(hasCssRule('button', 'margin-top: 10px')).toBeTruthy();
   });
 });
