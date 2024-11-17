@@ -2,10 +2,17 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "jest-css-modules": "^2.1.0",
-    "jsdom": "^25.0.1"
+    "jsdom": "^25.0.1",
+    "nodemon": "^3.1.7"
   },
   "scripts": {
     "test": "jest",
-    "watch": "chokidar 'index.html' 'index.css' -c 'npm test'"
+    "watch": "chokidar 'index.html' 'index.css' -c 'npm test'",
+    "start": "nodemon ./server/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "node-fetch": "^3.3.2"
   }
 }

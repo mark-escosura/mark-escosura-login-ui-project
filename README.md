@@ -122,3 +122,19 @@ Good luck, and happy coding!
     •	Watch Mode (Chokidar): A script using Chokidar is set up to automatically run tests whenever changes are made to the index.html or index.css files.
     •	Exiting Watch Mode: You can exit Chokidar watch mode by pressing CTRL + C in the terminal.
     •	Live Server Setup: Instructions have been added on how to install and use Live Server to view your website in real-time.
+
+### TODO: Use Github API to send issues to this Github's repository.
+
+[ ] Create a backend server that handles interaction with Github's API. This server will securely store our PAT(personal access token) and process requests from the frontend.
+
+[x] Protect Sensitive Data with env variables.
+
+[ ] Update the frontend to send a request to the backend instead of directly interacting with Github.
+
+[ ] Deploy the back end via Vercel/Heroku.
+
+#### Benefits of this setup are:
+
+- Token security: The github token is never exposed to the client
+- Control: The backend can validate and sanitize data before sending it to Github.
+- Extensibility: Add additional logic without modifying the frontend.
