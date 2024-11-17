@@ -39,7 +39,7 @@ input {
     font-size: 16px;
 }
 
-button {
+.login-button {
     margin-top: 10px;
     border-radius: 10px;
     border-style: none;
@@ -49,6 +49,16 @@ button {
 }
 
 /* Widget Styles */
+
+/* Widget Variables */
+:root {
+  --widget-border: rgba(0, 0, 0, 0.7);
+  --widget-border-hovered: rgb(255, 255, 255);
+  --widget-background-color-hovered: rgba(0, 0, 0, 0.7);
+  --widget-color-hovered: rgb(255, 255, 255);
+
+}
+
 .issue-widget {
     position: fixed;
     top: 10px;
@@ -57,19 +67,41 @@ button {
 }
 
 .issue-widget button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.7);
     padding: 10px 15px;
+    border-color: var(--widget-border);
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
+    position: relative;
+}
+
+/* Tooltip for the text */
+.issue-widget button .tooltip {
+  position: absolute;
+  bottom: -30px; /* Change this to position it below the button */
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: none;
+  white-space: nowrap;
+}
+
+.issue-widget button:hover .tooltip {
+  display: block;
 }
 
 .issue-widget button:hover {
-    background-color: #0056b3;
+    background-color: var(--widget-background-color-hovered);
+    color: var(--widget-color-hovered);
+    border-color: var(--widget-border-hovered);
 }
 
+/* Issue Box Styling */
 .issue-box {
     background-color: white;
     border: 1px solid #ddd;

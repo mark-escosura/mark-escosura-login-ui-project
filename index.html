@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark's Login UI Project</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN link -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -14,13 +16,16 @@
             <h2>Sign in</h2>
             <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
-            <button type="submit">Log In</button>
+            <button class="login-button" type="submit">Log In</button>
         </form>
     </div>
 
     <!-- Issue Submission Widget -->
     <div class="issue-widget">
-        <button id="toggle-widget">Submit an Issue</button>
+        <button id="toggle-widget">
+            <i class="fas fa-question"></i>
+            <span class="tooltip">Are there issues?</span>
+        </button>
         <div class="issue-box hidden">
             <h3>Submit an Issue</h3>
             <form id="issue-form">
