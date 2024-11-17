@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark's Login UI Project</title>
     <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
     <div class="login-container">
         <form class="login-box">
             <h2>Sign in</h2>
@@ -14,10 +17,27 @@
             <button type="submit">Log In</button>
         </form>
     </div>
-</head>
 
-<body>
+    <!-- Issue Submission Widget -->
+    <div class="issue-widget">
+        <button id="toggle-widget">Submit an Issue</button>
+        <div class="issue-box hidden">
+            <h3>Submit an Issue</h3>
+            <form id="issue-form">
+                <label for="issue-name">Name:</label>
+                <input type="text" id="issue-name" placeholder="Your name" required>
 
+                <label for="issue-email">Email:</label>
+                <input type="email" id="issue-email" placeholder="Your email" required>
+
+                <label for="issue-description">Issue Description:</label>
+                <textarea id="issue-description" rows="3" placeholder="Describe the issue..." required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+            <div id="confirmation" class="hidden">Thank you! Your issue has been submitted.</div>
+        </div>
+    </div>
 </body>
 
 </html>
