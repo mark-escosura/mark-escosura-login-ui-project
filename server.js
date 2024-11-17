@@ -1,8 +1,12 @@
 const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
+
+app.use(cors());
 
 // Load environment variables
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -11,37 +15,37 @@ const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME;
 
 app.use(express.json());
 
-// Create the endpoint that will create the Issue
 app.post('/api/create-issue', async (req, res) => {
-  const { title, body } = req.body; // Issue title and body from frontend
+  const { title, body } = req.body;
 
   try {
-    const response = await fetch(
+    const response = await axios.post(
       `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/issues`,
       {
-        method: 'POST',
+        title,
+        body,
+      },
+      {
         headers: {
           Authorization: `Bearer ${GITHUB_TOKEN}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, body }),
       }
     );
-
-    if (response.ok) {
-      const data = await response.json();
-      res.status(201).json(data); // Respond with the created issue
-    } else {
-      const errorData = await response.json();
-      res.status(response.status).json(errorData); // Respond with error details
-    }
+    // Send back the Github response
+    res.status(201).json(response.data);
   } catch (error) {
     console.error('Error creating issue:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    // Handle the error response from GitHub
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
   }
 });
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running at https://localhost:${PORT}...`);
+  console.log(`Server is running at http://localhost:${PORT}...`);
 });
