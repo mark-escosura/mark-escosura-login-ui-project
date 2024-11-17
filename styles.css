@@ -1,20 +1,23 @@
 /* styles.css */
+
+/* General Reset */
 body, 
 html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family:'Courier New', Courier, monospace;
-  }
-  
-  .login-container {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Centered Login Container */
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
-  
-  .login-box {
+}
+
+.login-box {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,24 +26,95 @@ html {
     min-height: 250px;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  }
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
 
-  h2 {
+h2 {
     align-self: center;
-  }
+}
 
-  input {
+input {
     margin: 10px 0;
     padding: 10px;
     font-size: 16px;
-  }
-  
-  button {
+}
+
+button {
     margin-top: 10px;
     border-radius: 10px;
     border-style: none;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
-  }
+}
+
+/* Widget Styles */
+.issue-widget {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.issue-widget button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.issue-widget button:hover {
+    background-color: #0056b3;
+}
+
+.issue-box {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 300px;
+    display: none;
+    margin-top: 10px;
+}
+
+.issue-box.hidden {
+    display: none;
+}
+
+.issue-box label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.issue-box input,
+.issue-box textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.issue-box button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.issue-box button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+#confirmation {
+    color: green;
+    margin-top: 10px;
+}
