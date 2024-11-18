@@ -4,51 +4,57 @@
 
 Create a visually appealing login user interface (UI) using HTML and CSS with Flexbox layout. The focus of this assignment is on styling and layout, so the UI does not need to be functional.
 
+Additionally, an Issue Submission Widget has been added as a secondary feature, demonstrating API integration and backend functionality.
+
+<hr>
+
 ## Project Overview
+
+### Primary Feature: Login UI
 
 This project implements a simple login UI using HTML and CSS with a Flexbox layout. The main features are:
 
 1. Login Box Styling:
 
-- The login box has a minimum size and is responsive.
+   - The login box has a minimum size and is responsive.
 
-- Box-shadow and rounded corners for a clean, modern look.
+   - Box-shadow and rounded corners for a clean, modern look.
 
-- Flexbox used for centering and aligning elements.
+   - Flexbox used for centering and aligning elements.
 
 2. Form Inputs:
 
-- Includes input fields for Username and Password with placeholder text.
+   - Includes input fields for Username and Password with placeholder text.
 
-- Password field hides text input as asterisks or circles.
+   - Password field hides text input as asterisks or circles.
 
 3. Submit Button:
 
-- A styled button (e.g., “Log In”) matches the overall UI design.
+   - A styled button (e.g., “Log In”) matches the overall UI design.
 
-## Summary of Tests
+### Secondary Feature: Issue Submission Widget
 
-The following features are validated with the tests:
+An Issue Submission Widget has been integrated, allowing users to submit issues directly to a GitHub repository via the GitHub API.
 
-1. Login Box Styling:
+1.  Form-Based Issue Creation:
 
-   • The login box should have a minimum size.
+    - Users can toggle the issue submission form.
 
-   • Box-shadow and border-radius properties are correctly applied.
+    - Input fields for Name, Email, and Description of the issue.
 
-   • Flexbox properties used for centering and responsiveness.
+2.  Github Integration:
 
-2. Form Inputs:
+    - Submits the issues to a GitHub repository specified in the .env file using a secure backend.
 
-   • Username and Password fields have proper placeholder text.
+3.  Confirmation and Error Handling:
 
-   • Password text is hidden.
+        - Displays confirmation for successful submissions.
 
-3. Button:
+        - Provides error messages and console logs for debugging in case of failure.
 
-   • A functional and styled button exists.
+    <hr>
 
-### Repository Setup
+## Repository Setup
 
     1.	Clone the Repository:
 
@@ -58,7 +64,7 @@ The following features are validated with the tests:
 
     2.	Install Dependencies:
 
-This project uses Jest for testing and Chokidar for automatically running tests whenever a file changes. To install the required dependencies, run:
+This project uses Jest for testing, Chokidar for watch mode, and Express for backend integration. To install the required dependencies, run:
 
 `npm install`
 
@@ -110,31 +116,61 @@ After installation, you can run the following command in your terminal to start 
 
 This will automatically open the website in your default browser, and you will be able to view and interact with the login UI. Any changes you make to the HTML or CSS files will be reflected in the browser in real time.
 
-### Additional Notes
+<hr>
 
-    •	Each test in the Jest suite corresponds to a specific styling guideline mentioned in the assignment.
-    •	Feel free to ask for clarification if any tests fail, and I will provide further guidance.
+## How to Use the Features
 
-Good luck, and happy coding!
+### Using the Login UI:
 
-### Key Updates:
+    1.	Open the index.html file in your browser or via a live server.
+    2.	Enter your Username and Password in the login form.
+    3.	Use this template as a starting point for authentication features.
 
-    •	Watch Mode (Chokidar): A script using Chokidar is set up to automatically run tests whenever changes are made to the index.html or index.css files.
-    •	Exiting Watch Mode: You can exit Chokidar watch mode by pressing CTRL + C in the terminal.
-    •	Live Server Setup: Instructions have been added on how to install and use Live Server to view your website in real-time.
+### Using the Issue Submission Widget:
 
-### TODO: Use Github API to send issues to this Github's repository.
+    1.	Toggle the Widget:
+        • Click the “Open Issue Widget” button to reveal the form.
+    2.	Fill Out the Form:
+        • Provide your Name, Email, and a detailed Description of the issue.
+        • Click Submit to send the issue to the GitHub repository.
+    3.	Backend Integration:
+        • Ensure the server is running (npm run server) for this feature.
+        • The backend securely handles GitHub API requests.
+    4.	Error Handling:
+        • Any issues with submission will display an error message in the browser and log details to the console.
 
-[ ] Create a backend server that handles interaction with Github's API. This server will securely store our PAT(personal access token) and process requests from the frontend.
+## Summary of Tests
 
-[x] Protect Sensitive Data with env variables.
+The following features are validated with the tests:
 
-[ ] Update the frontend to send a request to the backend instead of directly interacting with Github.
+1. Login Box Styling:
 
-[ ] Deploy the back end via Vercel/Heroku.
+   • The login box should have a minimum size.
 
-#### Benefits of this setup are:
+   • Box-shadow and border-radius properties are correctly applied.
 
-- Token security: The github token is never exposed to the client
-- Control: The backend can validate and sanitize data before sending it to Github.
-- Extensibility: Add additional logic without modifying the frontend.
+   • Flexbox properties used for centering and responsiveness.
+
+2. Form Inputs:
+
+   • Includes input fields for Username and Password with placeholder text.
+
+   • Password field hides text input as asterisks or circles.
+
+3. Submit Button:
+
+   • A styled button (e.g., “Log In”) matches the overall UI design.
+
+<hr>
+
+### TODO: Authentication Enhancement (Upcoming)
+
+A future enhancement will allow users to authenticate via GitHub OAuth and submit issues under their own GitHub account.
+
+### Key Benefits of the Issue Widget:
+
+    •   Token Security: The backend securely stores the GitHub token, ensuring it’s never exposed to the client.
+    •	Data Validation: The server validates and sanitizes data before interacting with GitHub.
+    •	Extensibility: Backend logic can be extended without changing the frontend code.
+
+Feel free to clone, modify, and extend this project! Let me know if you need any further updates or enhancements to this README.
