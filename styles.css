@@ -135,6 +135,16 @@ input {
 #confirmation {
     color: green;
     margin-top: 10px;
-    display: block;
+    display: none;
 }
 
+/* Responsive Design */
+@media (max-width: 600px) {
+    .login-box {
+        min-width: 50%;
+    }
+
+    .issue-box {
+        width: 90%;
+    }
+}
